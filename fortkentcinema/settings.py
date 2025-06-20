@@ -11,24 +11,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config, Csv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-jy^@7sk^*8wslfzxy#e=ol_24*4%ji_jo1m@78@2(8z+2t((sl'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -39,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'rest_framework',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -70,20 +59,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'fortkentcinema.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -100,25 +81,55 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
+# === S3 & CloudFront ===
+AWS_ACCESS_KEY_ID      = config("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY  = config("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = "cdn.fortkentcinema.com"
+AWS_S3_REGION_NAME     = "us-east-1"          # or your bucket’s region
+AWS_S3_SIGNATURE_VERSION = "s3v4"
+AWS_QUERYSTRING_AUTH   = False                # no ?X-Amz-Signature on public files
+AWS_S3_OBJECT_PARAMETERS = {
+    "CacheControl": "max-age=31536000, public",  # 1 year (change if needed)
+}
 
-STATIC_URL = 'static/'
+# CloudFront domain you created
+CLOUDFRONT_DOMAIN = "d1hxvt7h63tbr0.cloudfront.net"
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+# ---------- STATIC ----------
+STATICFILES_STORAGE = "fortkentcinema.storage_backends.StaticStorage"
+STATIC_URL          = f"https://{CLOUDFRONT_DOMAIN}/static/"
+STATIC_ROOT         = BASE_DIR / "static_collected"   # local tmp dir for collectstatic
+
+# ---------- MEDIA ----------
+DEFAULT_FILE_STORAGE = "fortkentcinema.storage_backends.MediaStorage"
+MEDIA_URL            = f"https://{CLOUDFRONT_DOMAIN}/media/"
+
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "OPTIONS": {
+            "bucket_name": AWS_STORAGE_BUCKET_NAME,
+            "region_name": AWS_S3_REGION_NAME,
+            "access_key": AWS_ACCESS_KEY_ID,
+            "secret_key": AWS_SECRET_ACCESS_KEY,
+            "custom_domain": CLOUDFRONT_DOMAIN,
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "fortkentcinema.storage_backends.StaticStorage",
+    },
+}
+
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
