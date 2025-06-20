@@ -29,6 +29,10 @@ class BlogPost(SlugModelMixin):
     category = models.ForeignKey(BlogCategory, on_delete=models.CASCADE)
     post_date = models.DateField()
     content = models.TextField()
+    header_image = models.ImageField(upload_to="blog/images/", null=True, blank=True)
     
     class Meta:
         ordering = ['-post_date']
+        
+    def __str__(self):
+        return self.subtitle

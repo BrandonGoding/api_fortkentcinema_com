@@ -102,7 +102,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 
 # CloudFront domain you created
-CLOUDFRONT_DOMAIN = "d1hxvt7h63tbr0.cloudfront.net"
+CLOUDFRONT_DOMAIN = "cdn.fortkentcinema.com"
 
 # ---------- STATIC ----------
 STATICFILES_STORAGE = "fortkentcinema.storage_backends.StaticStorage"
