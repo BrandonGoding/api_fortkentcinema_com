@@ -9,7 +9,7 @@ class BlogAuthor(SlugModelMixin):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
 
-    slug = 'full_name'
+    slug_field = 'full_name'
 
     @property
     def full_name(self):
@@ -37,6 +37,8 @@ class BlogPost(SlugModelMixin):
     post_date = models.DateField()
     content = models.TextField()
     header_image = models.ImageField(upload_to="blog/images/", null=True, blank=True)
+
+    slug_field = "subtitle"
     
     class Meta:
         ordering = ['-post_date']
