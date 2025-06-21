@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
+    'cinema.apps.CinemaConfig',
+    'core.apps.CoreConfig',
     'rest_framework',
 ]
 

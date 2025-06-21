@@ -1,7 +1,7 @@
 import uuid
-from .mixins import SlugModelMixin
+from core.mixins import SlugModelMixin
 from django.db import models
-from django.utils.text import slugify
+
 
 # Create your models here.
 class BlogAuthor(SlugModelMixin):
