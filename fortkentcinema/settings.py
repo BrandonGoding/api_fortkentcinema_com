@@ -16,6 +16,7 @@ from decouple import config, Csv
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
+ENABLE_CDN = config('ENABLE_CDN', default=False, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 INSTALLED_APPS = [
@@ -27,8 +28,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'rest_framework',
-    'storages',
 ]
+
+if ENABLE_CDN:
+    INSTALLED_APPS += [
+        'storages',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -89,47 +94,48 @@ USE_I18N = True
 
 USE_TZ = True
 
+if ENABLE_CDN:
+    # === S3 & CloudFront ===
+    AWS_ACCESS_KEY_ID      = config("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY  = config("AWS_SECRET_ACCESS_KEY")
+    AWS_STORAGE_BUCKET_NAME = "cdn.fortkentcinema.com"
+    AWS_S3_REGION_NAME     = "us-east-1"          # or your bucket’s region
+    AWS_S3_SIGNATURE_VERSION = "s3v4"
+    AWS_QUERYSTRING_AUTH   = False                # no ?X-Amz-Signature on public files
+    AWS_S3_OBJECT_PARAMETERS = {
+        "CacheControl": "max-age=31536000, public",  # 1 year (change if needed)
+    }
 
-# === S3 & CloudFront ===
-AWS_ACCESS_KEY_ID      = config("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY  = config("AWS_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME = "cdn.fortkentcinema.com"
-AWS_S3_REGION_NAME     = "us-east-1"          # or your bucket’s region
-AWS_S3_SIGNATURE_VERSION = "s3v4"
-AWS_QUERYSTRING_AUTH   = False                # no ?X-Amz-Signature on public files
-AWS_S3_OBJECT_PARAMETERS = {
-    "CacheControl": "max-age=31536000, public",  # 1 year (change if needed)
-}
+    # CloudFront domain you created
+    CLOUDFRONT_DOMAIN = "cdn.fortkentcinema.com"
 
-# CloudFront domain you created
-CLOUDFRONT_DOMAIN = "cdn.fortkentcinema.com"
+    # ---------- STATIC ----------
+    STATICFILES_STORAGE = "fortkentcinema.storage_backends.StaticStorage"
+    STATIC_URL          = f"https://{CLOUDFRONT_DOMAIN}/static/"
 
-# ---------- STATIC ----------
-STATICFILES_STORAGE = "fortkentcinema.storage_backends.StaticStorage"
-STATIC_URL          = f"https://{CLOUDFRONT_DOMAIN}/static/"
-STATIC_ROOT         = BASE_DIR / "static_collected"   # local tmp dir for collectstatic
-
-# ---------- MEDIA ----------
-DEFAULT_FILE_STORAGE = "fortkentcinema.storage_backends.MediaStorage"
-MEDIA_URL            = f"https://{CLOUDFRONT_DOMAIN}/media/"
+    # ---------- MEDIA ----------
+    DEFAULT_FILE_STORAGE = "fortkentcinema.storage_backends.MediaStorage"
+    MEDIA_URL            = f"https://{CLOUDFRONT_DOMAIN}/media/"
 
 
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
-        "OPTIONS": {
-            "bucket_name": AWS_STORAGE_BUCKET_NAME,
-            "region_name": AWS_S3_REGION_NAME,
-            "access_key": AWS_ACCESS_KEY_ID,
-            "secret_key": AWS_SECRET_ACCESS_KEY,
-            "custom_domain": CLOUDFRONT_DOMAIN,
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+            "OPTIONS": {
+                "bucket_name": AWS_STORAGE_BUCKET_NAME,
+                "region_name": AWS_S3_REGION_NAME,
+                "access_key": AWS_ACCESS_KEY_ID,
+                "secret_key": AWS_SECRET_ACCESS_KEY,
+                "custom_domain": CLOUDFRONT_DOMAIN,
+            },
         },
-    },
-    "staticfiles": {
-        "BACKEND": "fortkentcinema.storage_backends.StaticStorage",
-    },
-}
-
+        "staticfiles": {
+            "BACKEND": "fortkentcinema.storage_backends.StaticStorage",
+        },
+    }
+else:
+    STATIC_URL = '/static/'
+STATIC_ROOT         = BASE_DIR / "static_collected"   # local tmp dir for collectstatic
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
