@@ -9,13 +9,20 @@ class BlogAuthor(SlugModelMixin):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
 
+    slug = 'full_name'
+
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
     
 class BlogCategory(SlugModelMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100, unique=True)
+
+    slug_field = 'name'
 
     def __str__(self):
         return self.name
