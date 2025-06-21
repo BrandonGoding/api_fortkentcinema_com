@@ -33,6 +33,6 @@ class BlogPost(SlugModelMixin):
     
     class Meta:
         ordering = ['-post_date']
-        
+
     def __str__(self):
         return self.subtitle
