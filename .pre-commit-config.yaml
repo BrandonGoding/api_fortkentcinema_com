@@ -17,8 +17,11 @@ repos:
     rev: v1.10.0
     hooks:
       - id: mypy
-        args: ["--config-file=mypy.ini"]
-        language_version: python3.10
+        args: [ "--config-file=mypy.ini" ]
+        language: system
+        pass_filenames: false
+        entry: mypy .
+
 
   - repo: https://github.com/pycqa/flake8
     rev: 7.0.0
