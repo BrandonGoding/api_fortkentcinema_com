@@ -14,10 +14,10 @@ class BlogAuthor(SlugModelMixin):
     slug_field = "full_name"
 
     @property
-    def full_name(self):
+    def full_name(self) -> str:
         return f"{self.first_name} {self.last_name}"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
 
 
@@ -27,7 +27,7 @@ class BlogCategory(SlugModelMixin):
 
     slug_field = "name"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
@@ -46,5 +46,5 @@ class BlogPost(SlugModelMixin):
     class Meta:
         ordering = ["-post_date"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.subtitle

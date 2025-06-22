@@ -10,7 +10,7 @@ class Film(SlugModelMixin):
     youtube_id = models.CharField(max_length=100, unique=True, null=True, blank=True)
     omdb_json = models.JSONField(null=True, blank=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
 
 
@@ -20,18 +20,18 @@ class Booking(models.Model):
     booking_end_date = models.DateField()
     confirmed = models.BooleanField(default=False)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return (
             f"Booking for {self.film.title} from {self.booking_start_date}"
             f" to {self.booking_end_date}"
         )
 
     @property
-    def is_active(self):
+    def is_active(self) -> bool:
         return self.booking_start_date <= timezone.now().date() <= self.booking_end_date
 
     @property
-    def is_confirmed(self):
+    def is_confirmed(self) -> bool:
         return self.confirmed
 
     class Meta:

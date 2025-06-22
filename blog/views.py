@@ -1,4 +1,5 @@
 from rest_framework import status
+from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -12,10 +13,10 @@ class BlogPostListAPIView(APIView):
     API view to retrieve a list of blog posts.
     """
 
-    authentication_classes = []
-    permission_classes = []
+    authentication_classes: list[str] = []
+    permission_classes: list[str] = []
 
-    def get(self, request, format=None):
+    def get(self, request: Request, format: str | None = None) -> Response:
         """
         Handle GET requests to retrieve a list of blog posts.
         """
@@ -29,10 +30,10 @@ class BlogPostDetailAPIView(APIView):
     API view to retrieve a single blog post.
     """
 
-    authentication_classes = []
-    permission_classes = []
+    authentication_classes: list[str] = []
+    permission_classes: list[str] = []
 
-    def get(self, request, slug, format=None):
+    def get(self, request: Request, slug: str, format: str | None = None) -> Response:
         try:
             blog_post = BlogPost.objects.get(slug=slug)
         except BlogPost.DoesNotExist:

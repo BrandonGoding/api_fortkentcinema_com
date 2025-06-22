@@ -19,5 +19,5 @@ class SlugModelMixin(models.Model):
             self.slug = self.generate_slug()
         super().save(*args, **kwargs)
 
-    def generate_slug(self):
+    def generate_slug(self) -> str:
         return slugify(getattr(self, self.slug_field))
