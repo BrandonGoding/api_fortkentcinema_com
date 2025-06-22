@@ -6,7 +6,7 @@ from cinema.models import Film  # Assuming Film model uses SlugModelMixin
 
 class SlugModelMixinTestCase(TestCase):
 
-    def test_slug_is_unique(self):
+    def test_slug_is_unique(self) -> None:
         film1 = Film.objects.create(title="Elio", imdb_id="1", youtube_id="1")
         self.assertIsNotNone(film1.slug)
         self.assertEqual(film1.slug, "elio")
