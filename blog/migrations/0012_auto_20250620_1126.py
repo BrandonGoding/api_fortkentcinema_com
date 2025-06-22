@@ -1,13 +1,15 @@
 import json
+
 from django.db import migrations
 
+
 def update_header_images(apps, schema_editor):
-    BlogPost = apps.get_model('blog', 'BlogPost')
-    with open('blog/fixtures/blog.json', 'r') as f:
+    BlogPost = apps.get_model("blog", "BlogPost")
+    with open("blog/fixtures/blog.json") as f:
         data = json.load(f)
     for entry in data:
-        title = entry.get('title')
-        header_image = entry.get('header_image')
+        title = entry.get("title")
+        header_image = entry.get("header_image")
         if title and header_image:
             try:
                 post = BlogPost.objects.get(title=title)
@@ -16,10 +18,11 @@ def update_header_images(apps, schema_editor):
             except BlogPost.DoesNotExist:
                 continue
 
+
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0011_alter_blogpost_options_blogpost_header_image'),
+        ("blog", "0011_alter_blogpost_options_blogpost_header_image"),
     ]
 
     operations = [

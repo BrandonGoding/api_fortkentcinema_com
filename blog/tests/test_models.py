@@ -7,9 +7,16 @@ from blog.models import BlogAuthor, BlogCategory, BlogPost
 
 class BlogPostTestCase(TestCase):
     def setUp(self):
-        self.author = BlogAuthor.objects.create(last_name='last_name', first_name='first_name')
-        self.category = BlogCategory.objects.create(name='title')
-        self.post = BlogPost.objects.create(title='title', subtitle='subtitle', author=self.author, category=self.category, content='content', post_date="2025-01-01")
+        self.author = BlogAuthor.objects.create(last_name="last_name", first_name="first_name")
+        self.category = BlogCategory.objects.create(name="title")
+        self.post = BlogPost.objects.create(
+            title="title",
+            subtitle="subtitle",
+            author=self.author,
+            category=self.category,
+            content="content",
+            post_date="2025-01-01",
+        )
 
     def test_str(self):
         self.assertEqual(str(self.post), self.post.subtitle)
@@ -22,10 +29,9 @@ class BlogPostTestCase(TestCase):
         mock_slugify.assert_called_once_with(self.post.subtitle)
 
 
-
 class BlogAuthorTestCase(TestCase):
     def setUp(self):
-        self.author = BlogAuthor.objects.create(last_name='last_name', first_name='first_name')
+        self.author = BlogAuthor.objects.create(last_name="last_name", first_name="first_name")
 
     def test_str(self):
         self.assertEqual(str(self.author), f"{self.author.first_name} {self.author.last_name}")
@@ -37,9 +43,10 @@ class BlogAuthorTestCase(TestCase):
         self.author.save()
         mock_slugify.assert_called_once_with(self.author.full_name)
 
+
 class BlogCategoryTestCase(TestCase):
     def setUp(self):
-        self.category = BlogCategory.objects.create(name='title')
+        self.category = BlogCategory.objects.create(name="title")
 
     def test_str(self):
         self.assertEqual(str(self.category), f"{self.category.name}")

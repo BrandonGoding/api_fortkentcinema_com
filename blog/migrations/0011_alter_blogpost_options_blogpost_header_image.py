@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0010_auto_20250619_0209'),
+        ("blog", "0010_auto_20250619_0209"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='blogpost',
-            options={'ordering': ['-post_date']},
+            name="blogpost",
+            options={"ordering": ["-post_date"]},
         ),
         migrations.AddField(
-            model_name='blogpost',
-            name='header_image',
-            field=models.ImageField(blank=True, null=True, upload_to='blog/images/'),
+            model_name="blogpost",
+            name="header_image",
+            field=models.ImageField(blank=True, null=True, upload_to="blog/images/"),
         ),
     ]

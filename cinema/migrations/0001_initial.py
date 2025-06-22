@@ -7,21 +7,37 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Film',
+            name="Film",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('slug', models.SlugField(blank=True, max_length=100, null=True, unique=True)),
-                ('title', models.CharField(max_length=100)),
-                ('imdb_id', models.CharField(max_length=100, unique=True, blank=True, null=True)),
-                ('youtube_id', models.CharField(max_length=100, unique=True, blank=True, null=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(blank=True, max_length=100, null=True, unique=True),
+                ),
+                ("title", models.CharField(max_length=100)),
+                (
+                    "imdb_id",
+                    models.CharField(max_length=100, unique=True, blank=True, null=True),
+                ),
+                (
+                    "youtube_id",
+                    models.CharField(max_length=100, unique=True, blank=True, null=True),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]

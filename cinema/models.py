@@ -1,6 +1,8 @@
 from django.db import models
-from core.mixins import SlugModelMixin
 from django.utils import timezone
+
+from core.mixins import SlugModelMixin
+
 
 class Film(SlugModelMixin):
     title = models.CharField(max_length=100)
@@ -11,14 +13,18 @@ class Film(SlugModelMixin):
     def __str__(self):
         return self.title
 
+
 class Booking(models.Model):
-    film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='bookings')
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name="bookings")
     booking_start_date = models.DateField()
     booking_end_date = models.DateField()
     confirmed = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Booking for {self.film.title} from {self.booking_start_date} to {self.booking_end_date}"
+        return (
+            f"Booking for {self.film.title} from {self.booking_start_date}"
+            f" to {self.booking_end_date}"
+        )
 
     @property
     def is_active(self):
@@ -29,5 +35,4 @@ class Booking(models.Model):
         return self.confirmed
 
     class Meta:
-        ordering = ['-booking_start_date']
-
+        ordering = ["-booking_start_date"]

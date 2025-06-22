@@ -7,26 +7,41 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cinema', '0002_auto_20250621_0725'),
+        ("cinema", "0002_auto_20250621_0725"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='film',
-            name='omdb_json',
+            model_name="film",
+            name="omdb_json",
             field=models.JSONField(blank=True, null=True),
         ),
         migrations.CreateModel(
-            name='Booking',
+            name="Booking",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('booking_start_date', models.DateField()),
-                ('booking_end_date', models.DateField()),
-                ('confirmed', models.BooleanField(default=False)),
-                ('film', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bookings', to='cinema.film')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("booking_start_date", models.DateField()),
+                ("booking_end_date", models.DateField()),
+                ("confirmed", models.BooleanField(default=False)),
+                (
+                    "film",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="bookings",
+                        to="cinema.film",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['-booking_start_date'],
+                "ordering": ["-booking_start_date"],
             },
         ),
     ]
