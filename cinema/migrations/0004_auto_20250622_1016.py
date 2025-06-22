@@ -17,10 +17,14 @@ def load_bookings(apps, schema_editor):
     with open(settings.BASE_DIR / "cinema" / "fixtures" / "bookings.json") as f:
         data = json.load(f)
 
+    count = 0
+
     for film_data in data:
         film, created = Film.objects.get_or_create(
             title=film_data["title"], slug=slugify(film_data["title"])
         )
+        if created:
+            count += 1
         if film:
             Booking.objects.create(
                 film=film,
@@ -32,6 +36,8 @@ def load_bookings(apps, schema_editor):
                 ).date(),
                 confirmed=film_data.get("confirmed", False),
             )
+    if count:
+        print(f"There are {count} films missing from films.json")
 
 
 class Migration(migrations.Migration):
