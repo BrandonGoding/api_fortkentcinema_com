@@ -4,7 +4,7 @@ from unittest.mock import Mock
 from django.db import IntegrityError
 from django.test import TestCase
 
-from cinema.models import Film
+from cinema.models import Film, PlayDate
 
 
 class FilmModelTest(TestCase):
@@ -63,3 +63,24 @@ class BookingModelTest(TestCase):
     def test_is_not_confirmed(self) -> None:
         self.booking.confirmed = False
         self.assertFalse(self.booking.is_confirmed)
+
+
+class PlayDateModelTest(TestCase):
+    def setUp(self) -> None:
+        self.film = Film.objects.create(title="A Good Film", imdb_id="1234", youtube_id="5678")
+        self.play_date = self.film.play_dates.create(date="2023-01-01", time="15:00:00")
+
+    def test_play_date_str(self) -> None:
+        expected_str = f"{self.film.title} on {self.play_date.date} at {self.play_date.time}"
+        self.assertEqual(str(self.play_date), expected_str)
+
+    def test_is_matinee(self) -> None:
+        self.assertTrue(self.play_date.is_matinee)
+
+    def test_is_not_matinee(self) -> None:
+        self.play_date.time = "17:00:00"
+        self.assertFalse(self.play_date.is_matinee)
+
+    def test_unique_together(self) -> None:
+        with self.assertRaises(IntegrityError):
+            PlayDate.objects.create(film=self.film, date="2023-01-01", time="15:00:00")

@@ -1,3 +1,5 @@
+from datetime import datetime, time
+
 from django.db import models
 from django.utils import timezone
 
@@ -36,3 +38,24 @@ class Booking(models.Model):
 
     class Meta:
         ordering = ["-booking_start_date"]
+
+
+class PlayDate(models.Model):
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name="play_dates")
+    date = models.DateField()
+    time = models.TimeField()
+
+    def __str__(self) -> str:
+        return f"{self.film.title} on {self.date} at {self.time}"
+
+    @property
+    def is_matinee(self) -> bool:
+        if isinstance(self.time, str):
+            show_time = datetime.strptime(self.time, "%H:%M:%S").time()
+        else:
+            show_time = self.time
+        return show_time < time(16, 0)
+
+    class Meta:
+        unique_together = ("film", "date", "time")
+        ordering = ["date", "time"]
