@@ -15,15 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls.static import static
-from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 from django.conf import settings
 from website import urls as website_urls
+from wagtail.admin import urls as wagtailadmin_urls
+
 
 urlpatterns = [
     path("", include(website_urls)),
-    path("admin/", admin.site.urls),
+    path('cinema-cms/', include(wagtailadmin_urls))
 ]
 
 if settings.DEBUG:

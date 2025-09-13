@@ -36,6 +36,19 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "tailwind",
     "theme",
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail',
+    'modelcluster',
+    'taggit',
     "rest_framework",
     "corsheaders",
 ]
@@ -59,6 +72,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 if DEBUG:
@@ -171,6 +185,12 @@ if ENABLE_CDN:
 else:
     STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static_collected"  # local tmp dir for collectstatic
+MEDIA_ROOT = BASE_DIR / "media"
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10_000
+WAGTAIL_SITE_NAME = 'Fort Kent Cinema'
+WAGTAILADMIN_BASE_URL = 'https://www.fortkentcinema.com'
+WAGTAILDOCS_EXTENSIONS = ['pdf']
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
