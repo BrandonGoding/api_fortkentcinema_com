@@ -32,6 +32,7 @@ urlpatterns = [
         TemplateView.as_view(template_name="website/membership.html"),
         name="membership",
     ),
+    path("fort-kent-cinema-sponsorships/", TemplateView.as_view(template_name="website/sponsor-a-movie.html"), name="sponsorship"),
     path("contact-fort-kent-cinema/", website_views.contact_view, name="contact"),
     path(
         "sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"

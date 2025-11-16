@@ -1,0 +1,309 @@
+{% extends "base.html" %}
+
+{% block title %}Business Sponsorships – Fort Kent Cinema{% endblock %}
+{% block description %}Support small-town cinema and promote your business with monthly sponsorships and optional
+    sponsored showings at Fort Kent Cinema.{% endblock %}
+
+{% block content %}
+    <div class="min-h-screen bg-base-100">
+
+        <!-- Hero -->
+        <section class="hero bg-base-200 py-10">
+            <div class="hero-content flex-col lg:flex-row gap-10">
+                <div class="flex-1">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                        Partner With <span class="text-primary">Fort Kent Cinema</span>
+                    </h1>
+                    <p class="py-4 text-lg max-w-xl">
+                        Become a monthly sponsor and help keep small-town cinema alive in the St. John Valley.
+                        Your business receives ongoing visibility on the big screen and on our website, with
+                        the option to boost your presence through sponsored weeks and special showings.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mt-4">
+                        <a href="#monthly" class="btn btn-primary">
+                            View Sponsorship Tiers
+                        </a>
+                        <a href="#addons" class="btn btn-ghost">
+                            Add-On Sponsored Weeks
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex-1">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h2 class="card-title mb-2">Why Become a Sponsor?</h2>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Your message appears on the big screen before movies</li>
+                                <li>• Your name or logo is displayed on our website</li>
+                                <li>• You help keep a local, independent cinema thriving</li>
+                                <li>• Flexible tiers for different business sizes and goals</li>
+                            </ul>
+                            <div class="divider my-3"></div>
+                            <p class="text-sm">
+                                Questions? Email us at
+                                <a href="brandon.h.goding+sponsor@gmail.com" class="link link-primary">
+                                    brandon.h.goding+sponsor@gmail.com
+                                </a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Monthly Tiers -->
+        <section id="monthly" class="py-14 px-4 md:px-8 lg:px-16">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold mb-2">Monthly Sponsorship Tiers</h2>
+                    <p class="text-base-content/80 max-w-2xl mx-auto">
+                        Choose a monthly sponsorship level that matches your goals. All tiers include in-theater
+                        recognition and visibility on our website, with higher tiers offering additional benefits.
+                    </p>
+                </div>
+
+                <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+
+                    <!-- Supporter -->
+                    <div class="card bg-base-100 border border-base-300 shadow-md">
+                        <div class="card-body">
+                            <h3 class="card-title">Supporter</h3>
+                            <p class="text-3xl font-bold mt-2 mb-4">
+                                $100<span class="text-sm font-normal">/mo</span>
+                            </p>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Name displayed on our Community Sponsor pre-show slide</li>
+                                <li>• Name listed in the sponsor section on our homepage</li>
+                                <li>• Helps keep small-town cinema open and active</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Partner -->
+                    <div class="card bg-base-100 border border-primary/40 shadow-xl relative">
+                        <div class="badge badge-primary absolute right-4 top-4">Popular</div>
+                        <div class="card-body">
+                            <h3 class="card-title">Partner</h3>
+                            <p class="text-3xl font-bold mt-2 mb-4">
+                                $225<span class="text-sm font-normal">/mo</span>
+                            </p>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Dedicated pre-show slide for your business each month</li>
+                                <li>• Business logo displayed in the homepage sponsor section</li>
+                                <li>• One sponsored week per quarter (announcement &amp; slide)</li>
+                                <li>• In lobby recognition on our sponsorship wall</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Premier Partner -->
+                    <div class="card bg-base-100 border border-secondary/40 shadow-lg">
+                        <div class="card-body">
+                            <h3 class="card-title">Premier Partner</h3>
+                            <p class="text-3xl font-bold mt-2 mb-4">
+                                $350<span class="text-sm font-normal">/mo</span>
+                            </p>
+                            <ul class="space-y-2 text-sm">
+                                <li>• All Partner benefits</li>
+                                <li>• 15–30 second pre-show video ad</li>
+                                <li>• 4 complimentary tickets each month</li>
+                                <li>• Featured (larger) logo placement on our homepage</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Marquee Sponsor -->
+                    <div class="card bg-base-100 border border-accent/60 shadow-lg relative">
+                        <div class="badge badge-accent absolute right-4 top-4">Top Tier</div>
+                        <div class="card-body">
+                            <h3 class="card-title">Marquee Sponsor</h3>
+                            <p class="text-3xl font-bold mt-2 mb-4">
+                                $500<span class="text-sm font-normal">/mo</span>
+                            </p>
+                            <ul class="space-y-2 text-sm">
+                                <li>• All Premier Partner benefits</li>
+                                <li>• Enhanced pre-show presence with 60-90 second pre-show video as</li>
+                                <li>• 8 complimentary tickets each month</li>
+                                <li>• Prominent logo placement in the homepage sponsor section</li>
+                                <li>• Recognition as a lead supporter of Fort Kent Cinema</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add-On Sponsored Weeks / Movies -->
+        <section id="addons" class="py-14 px-4 md:px-8 lg:px-16 bg-base-200">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-center">Add-On Sponsored Weeks &amp; Showings</h2>
+                <p class="text-center text-base-content/80 max-w-2xl mx-auto mb-8">
+                    Monthly sponsors can boost their visibility by adding a sponsored week or sponsoring
+                    a specific movie. These options layer on top of your monthly tier benefits.
+                </p>
+
+                <div class="grid gap-8 md:grid-cols-2">
+
+                    <!-- PopcornPremier Add-On -->
+                    <div class="card bg-base-100 shadow-lg">
+                        <div class="card-body">
+                            <h3 class="text-xl font-semibold mb-2">PopcornPremier</h3>
+                            <p class="text-3xl font-bold mb-4">
+                                $350<span class="text-sm font-normal"> add-on</span>
+                            </p>
+                            <p class="text-sm mb-4">
+                                Treat every guest to a free small popcorn for one full showing — sponsored by your
+                                business.
+                                A crowd-pleasing way to create a memorable theater experience and put your brand
+                                front-and-center.
+                            </p>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Business announced as the PopcornPremier sponsor before the show</li>
+                                <li>• Custom slide displayed during the pre-show reel</li>
+                                <li>• Logo featured on the concession counter sign for that showing</li>
+                                <li>• Free small popcorn for all attendees (cost covered by sponsor)</li>
+                                <li>• Temporary homepage sponsor highlight for the week leading up to the event</li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <!-- Customer Appreciation Movie Night -->
+                    <div class="card bg-base-100 shadow-lg">
+                        <div class="card-body">
+                            <h3 class="text-xl font-semibold mb-2">Customer Appreciation Movie Night</h3>
+                            <p class="text-3xl font-bold mb-4">
+                                Starting at $1,200
+                            </p>
+                            <p class="text-sm mb-4">
+                                Treat your customers, clients, or employees to a private movie showing at Fort Kent
+                                Cinema —
+                                an unforgettable way to show your appreciation and create a memorable experience.
+                            </p>
+                            <ul class="space-y-2 text-sm">
+                                <li>• “This showing is sponsored by…” announcement</li>
+                                <li>• Custom pre-show slide with your logo and message</li>
+                                <li>• Private auditorium for your group</li>
+                                <li>• Option to coordinate an in-theater giveaway or promotion</li>
+                                <li>• Temporary homepage sponsor highlight for the event</li>
+                                <li>• Optional lobby signage welcoming your guests</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact / Interest Form -->
+        <section class="py-12 px-4 md:px-8 lg:px-16 bg-base-100">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-2xl font-bold mb-4 text-center">Start a Conversation</h2>
+                <p class="text-center text-base-content/80 mb-8">
+                    Fill out the form below to let us know which tier you’re interested in. We’ll follow up
+                    with details, available dates, and next steps. Submitting this form does not lock you in.
+                </p>
+
+                <form method="post" class="card bg-base-100 shadow-xl border border-base-300">
+    {% csrf_token %}
+    <div class="card-body space-y-6">
+
+        <!-- Header -->
+        <h2 class="text-2xl font-bold text-center mb-2">
+            Business Sponsorship Interest
+        </h2>
+        <p class="text-center text-base-content/70">
+            Tell us a little about your business and what you'd like to explore.
+        </p>
+
+        <!-- Business Info -->
+        <div class="p-4 rounded-xl bg-base-200 space-y-4">
+            <h3 class="text-lg font-semibold">Business Information</h3>
+
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="label-text">Business Name</span>
+                </label>
+                <input type="text" name="business_name" class="input input-bordered w-full" required>
+            </div>
+
+            <div class="grid gap-4 md:grid-cols-2">
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text">Contact Person</span>
+                    </label>
+                    <input type="text" name="contact_name" class="input input-bordered w-full" required>
+                </div>
+
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text">Email</span>
+                    </label>
+                    <input type="email" name="email" class="input input-bordered w-full" required>
+                </div>
+            </div>
+
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="label-text">Phone (optional)</span>
+                </label>
+                <input type="text" name="phone" class="input input-bordered w-full">
+            </div>
+        </div>
+
+        <!-- Options Section -->
+        <div class="p-4 rounded-xl bg-base-200 space-y-4">
+            <h3 class="text-lg font-semibold">Sponsorship Options</h3>
+
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="label-text">Preferred Monthly Tier</span>
+                </label>
+                <select name="tier" class="select select-bordered w-full">
+                    <option value="">I’m not sure yet</option>
+                    <option value="Supporter">Supporter – $100/mo</option>
+                    <option value="Partner">Partner – $225/mo</option>
+                    <option value="Premier Partner">Premier Partner – $350/mo</option>
+                    <option value="Marquee Sponsor">Marquee Sponsor – $500/mo</option>
+                </select>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Interested in Add-Ons?</span>
+                </label>
+                <textarea name="addons" class="textarea textarea-bordered w-full" rows="3"
+                          placeholder="Sponsored week, sponsored movie, or a custom idea."></textarea>
+            </div>
+
+        </div>
+
+        <!-- Notes -->
+        <div class="p-4 rounded-xl bg-base-200 space-y-3">
+            <h3 class="text-lg font-semibold">Additional Notes</h3>
+            <textarea name="notes" class="textarea textarea-bordered w-full" rows="3"
+                      placeholder="Anything else we should know?"></textarea>
+        </div>
+
+        <!-- Submit -->
+        <div class="card-actions justify-end mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Submit Interest
+            </button>
+        </div>
+    </div>
+</form>
+
+
+                <p class="mt-4 text-xs text-center text-base-content/70">
+                    Prefer email? Reach us at
+                    <a href="mailto:brandon.h.goding+sponsor@gmail.com" class="link link-primary">
+                        brandon.h.goding+sponsor@gmail.com
+                    </a>.
+                </p>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}
